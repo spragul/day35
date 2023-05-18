@@ -12,7 +12,8 @@ primary key(id)
 insert into genre( movie_genre)value(' Adventure');
 insert into genre( movie_genre)value('Comedy');
 insert into genre( movie_genre)value('Drama');
-select * from imdb.genre;
+
+select * from genre;
 
 create table movies(
 id int auto_increment,
@@ -34,7 +35,13 @@ value('1','777 Charlie','2022','9'),
 ('3',' Das Ka Dhamki','2023','6'),
 ('3','Anbe Sivam','2003','9');
 
-select * from imdb.movies;
+-- get table data
+select * from movies;
+-- update table data
+update movies
+set movie_name='ragul'
+where id=1;
+
 
 create table user_review(
 id int auto_increment,
@@ -60,7 +67,14 @@ values('1',' Dharma is stuck in a rut with his negative and lonely lifestyle and
 ('6','Two men, one young and arrogant, the other damaged - physically but not spiritually - by life, are thrown together by circumstances.'),
 ('6',' find that they are in some ways bound together by fate.');
 
-select * from imdb.user_review;
+-- get table data
+select * from user_review;
+-- update table data
+update user_review
+set user_reviews='ragul'
+where id=1;
+-- delete table data
+delete from user_review where id=1;
 
 create table skills(
 id int auto_increment,
@@ -82,8 +96,16 @@ value('1','Rakshit Shetty','35','actor, writer'),
 ('5','Vishwak Sen','36','Director,Make-Up Department'),
 ('6','Kamal Haasan','61','Director,Music Department');
 
+-- get table data
 select * from skills;
+-- join table data
 select * from movies g join skills s on g.id=s.skillid;
+-- update table data
+update skills
+set actor_name='ragul'
+where id=1;
+-- delete table data
+delete from skills where id=1;
 
 create table roles(
 id int auto_increment,
@@ -95,6 +117,7 @@ updateAt timestamp on update current_timestamp,
 primary key(id),
 foreign key(role_id) references movies(id)
 );
+
 insert into roles(role_id,movie_role_one,movie_role_two)
 values('1','Dr. Ashwin Kumar','Karshan Roy'),
 ('2','Ajatashatru Oghash Rathod','Wiraj'),
@@ -103,7 +126,14 @@ values('1','Dr. Ashwin Kumar','Karshan Roy'),
 ('5','Investor Dhanunjay','Dr. Sanjay Rudra'),
 ('6','Nallasivam','Kandasamy Padayachi');
 
+-- get table data
 select * from roles;
+-- update table data
+update roles
+set movie_role_one='ragul'
+where id=1;
+-- delete table data
+delete from roles where id=1;
 
 
 create table imgs(
@@ -126,5 +156,15 @@ values(1,load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ad1.jpg')),
 (5,load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/d1.jpg')),
 (6,load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/d2.jpg'));
 
+-- get table data
  select * from imgs;
+--  join multiple table data
+ select movie_id,image,movie_name,movie_year,movie_rating,actor_name,movie_role_one,movie_role_two
+ from movies m 
+ join imgs i on m.id=i.image_id
+ join skills s on m.id=s.skillid
+ join roles r on m.id=r.role_id;
  
+
+
+
